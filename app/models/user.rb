@@ -3,13 +3,19 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-   validates :name,
+  def active_for_authentication?
+    super && (self.is_valid == false)
+  end
+   validates :name, uniqueness: true,
    format: { with: /\A([ぁ-んァ-ン一-龥]|ー)+\z/},
    presence: true
-   validates :name_kana,
-   format: { with: /\A([ァ-ン]|ー)+\z/},
-   presence: true
+
+  def to_param
+    name
+  end
+#   validates :name_kana,
+#   format: { with: /\A([ァ-ン]|ー)+\z/}
+#   presence: true
    validates :postcode,
    format: { with: /\A\d{7}\z/},
    presence: true

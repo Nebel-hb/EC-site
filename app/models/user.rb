@@ -3,19 +3,19 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  def active_for_authentication?
+    super && (self.is_deleted == false)
+  end
 
-   validates :first_name,
+   validates :name,
    format: { with: /\A([ぁ-んァ-ン一-龥]|ー)+\z/},
    presence: true
-   validates :last_name,
-   format: { with: /\A([ぁ-んァ-ン一-龥]|ー)+\z/},
-   presence: true
-   validates :first_name_kana,
+  
+   validates :name_kana,
    format: { with: /\A([ァ-ン]|ー)+\z/},
    presence: true
-   validates :last_name_kana,
-   format: { with: /\A([ァ-ン]|ー)+\z/},
-   presence: true
+  
    validates :postcode,
    format: { with: /\A\d{7}\z/},
    presence: true
@@ -33,5 +33,6 @@ class User < ApplicationRecord
     def prefecture_name=(prefecture_name)
       self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
     end
+
 
 end

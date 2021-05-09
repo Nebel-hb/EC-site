@@ -1,5 +1,5 @@
 class Shop < ApplicationRecord
-  
-  attachment :image 
-
+  has_many :shop_categories
+  has_many :categories, through: :shop_categories
+  attachment :image
 end

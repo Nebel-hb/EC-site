@@ -10,13 +10,28 @@
   </head>
 
   <body>
+    <%= flash[:error] %>
      <% if user_signed_in? %>
+        <% if current_user.admin? %>
       <li>
-        <%= link_to '投稿フォーム', new__path %>
+          <%= link_to '投稿フォーム', new_admin_shop_path %>
+      </li>
+        <% end %>
+      <li>
+          <%= link_to '商品一覧', shops_path %>
       </li>
       <li>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       </li>
+      <!--% if user_signed_in? && @user.id == current_user.id %>-->
+      <!--<li>-->
+      <!--  %= link_to "退会", users_hide_path(current_user), method: :put, "data-confirm" => "本当に退会しますか？", class: "btn btn-outline-danger" %>-->
+      <!--</li>-->
+      <!--% end %>-->
+      <!--<li>-->
+      <!--  %= link_to "退会", confirm_unsubscribe_path %>-->
+      <!--</li>-->
+
     <% else %>
       <li>
         <%= link_to "新規登録", new_user_registration_path %>

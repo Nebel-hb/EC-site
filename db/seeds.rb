@@ -11,4 +11,8 @@ User.create!(name:  "管理者",
              postcode: "2700138",
              password:  "1111800018",
              password_confirmation: "1111800018",
+             telephone_number: "00000000000",
+             is_deleted: false,
+
+
              admin: true)

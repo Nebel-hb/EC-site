@@ -1,0 +1,2 @@
+module Users::OderDetailsHelper
+end

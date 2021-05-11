@@ -5,6 +5,7 @@ class Admin::ShopsController < ApplicationController
 
   def new
     @shop = Shop.new
+    @genres = Genre.all
   end
 
   def create
@@ -12,6 +13,7 @@ class Admin::ShopsController < ApplicationController
     # @shop.user_id = current_user.id
     @shop.save
     redirect_to shops_path
+    # redirect_to admin_item_path(@item)
   end
 
   def index
@@ -19,9 +21,20 @@ class Admin::ShopsController < ApplicationController
   end
 
   def show
+   @shop=Shop.find(params[:id])
   end
 
-  def destroy
+
+  def edit
+   @shop=Shop.find(params[:id])
+   @genres = Genre.all
+  end
+
+  def update
+   @shop=Shop.find(params[:id])
+   @shop.update(shop_params)
+  # redirect_to admin_items_path
+
   end
 
   def shop_params

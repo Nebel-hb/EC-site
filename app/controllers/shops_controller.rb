@@ -6,7 +6,6 @@ class ShopsController < ApplicationController
 
   def create
     @shop = Shop.new(shop_params)
-    # @shop.user_id = current_user.id
     @shop.save
     redirect_to shops_path
   end
@@ -16,6 +15,8 @@ class ShopsController < ApplicationController
   end
 
   def show
+     @shop = Shop.find(params[:id])
+     @cart_item = CartItem.new
   end
 
   def destroy
